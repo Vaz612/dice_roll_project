@@ -2,6 +2,9 @@ pipeline {
   agent {
        label "dots-nexus-sync"
   }
+  environment {
+     scannerHome = tool 'SonarScanner'
+  }
 stages {
     stage('SCM') {
       steps {
@@ -9,7 +12,6 @@ stages {
       }
     }
     stage('SonarQube Analysis') {
-      //def scannerHome = tool 'SonarScanner';
       steps{
         withSonarQubeEnv(installationName: 'sonar-test') {
           sh "${scannerHome}/bin/sonar-scanner"
