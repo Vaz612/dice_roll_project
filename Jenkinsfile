@@ -11,7 +11,7 @@ stages {
     stage('SonarQube Analysis') {
       //def scannerHome = tool 'SonarScanner';
       steps{
-        withSonarQubeEnv(installationName: 'SonarQube_Scanner_Test') {
+        withSonarQubeEnv(installationName: 'sonar-test') {
           sh "${scannerHome}/bin/sonar-scanner"
         }
       }
