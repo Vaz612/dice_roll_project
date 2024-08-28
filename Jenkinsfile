@@ -1,11 +1,16 @@
-node {
-  stage('SCM') {
-    checkout scm
+pipeline {
+  agent {
+       label "dots-nexus-sync"
   }
-  stage('SonarQube Analysis') {
-    def scannerHome = tool 'SonarScanner';
-    withSonarQubeEnv() {
-      sh "${scannerHome}/bin/sonar-scanner"
+stages {
+    stage('SCM') {
+      checkout scm
+    }
+    stage('SonarQube Analysis') {
+      def scannerHome = tool 'SonarScanner';
+      withSonarQubeEnv() {
+        sh "${scannerHome}/bin/sonar-scanner"
+      }
     }
   }
 }
